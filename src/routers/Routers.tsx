@@ -4,13 +4,13 @@ import Layout from '../views/Layout/Layout'
 import News from '../views/Layout/News/News'
 
 const Routers = () => (
-  <BrowserRouter>
+  <HashRouter>
     <Routes>
       <Route element={<Layout />}>
         <Route path="/" element={<News />} />
       </Route>
     </Routes>
-  </BrowserRouter>
+  </HashRouter>
 )
 
 export default Routers
