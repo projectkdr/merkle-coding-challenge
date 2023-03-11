@@ -4,13 +4,13 @@ import Layout from '../views/Layout/Layout'
 import News from '../views/Layout/News/News'
 
 const Routers = () => (
-  <HashRouter basename={'/merkle-coding-challenge'}>
+  <BrowserRouter>
     <Routes>
       <Route element={<Layout />}>
         <Route path="/" element={<News />} />
       </Route>
     </Routes>
-  </HashRouter>
+  </BrowserRouter>
 )
 
 export default Routers
