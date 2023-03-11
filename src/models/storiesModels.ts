@@ -13,6 +13,7 @@ export type StoryDetail = {
   storyDate: string,
   storyTitle: string,
   storyUrl: string,
+  storyId: number
 }
 
 export type StoryItemData = {

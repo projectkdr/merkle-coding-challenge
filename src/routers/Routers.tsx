@@ -1,16 +1,16 @@
 import React from 'react'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Route, Routes, HashRouter } from 'react-router-dom'
 import Layout from '../views/Layout/Layout'
 import News from '../views/Layout/News/News'
 
 const Routers = () => (
-  <BrowserRouter>
+  <HashRouter basename={'/merkle-coding-challenge'}>
     <Routes>
       <Route element={<Layout />}>
         <Route path="/" element={<News />} />
       </Route>
     </Routes>
-  </BrowserRouter>
+  </HashRouter>
 )
 
 export default Routers

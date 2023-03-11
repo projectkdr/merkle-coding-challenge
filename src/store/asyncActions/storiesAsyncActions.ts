@@ -65,7 +65,7 @@ const fetchStoryItem = async (itemId: number) => {
   try {
     // Fetch the story item JSON data from the API and parse it as a StoryItemData object.
     const storyItemResponse = await fetch(`${API_URL}/item/${itemId}.json`)
-    const { by: userId, score, time, title, url } = await storyItemResponse.json() as StoryItemData
+    const { by: userId, id: storyId, score, time, title, url } = await storyItemResponse.json() as StoryItemData
 
     // Checks storyItemResponse response status and throws error if not successful (status code is not 200).
     if (storyItemResponse.status !== 200) {
@@ -87,7 +87,8 @@ const fetchStoryItem = async (itemId: number) => {
       storyScore: score,
       storyDate: formatDate(time),
       storyTitle: title,
-      storyUrl: url
+      storyUrl: url,
+      storyId
     }
 
     return storyDetail
@@ -99,7 +100,8 @@ const fetchStoryItem = async (itemId: number) => {
       storyScore: 0,
       storyDate: '',
       storyTitle: '',
-      storyUrl: ''
+      storyUrl: '',
+      storyId: 0
     }
   }
 }
