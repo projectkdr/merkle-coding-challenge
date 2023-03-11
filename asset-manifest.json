@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/merkle-coding-challenge/static/css/main.910564d3.css",
-    "main.js": "/merkle-coding-challenge/static/js/main.991505cd.js",
-    "static/js/787.a49d27d9.chunk.js": "/merkle-coding-challenge/static/js/787.a49d27d9.chunk.js",
-    "static/media/News_Dummy_Image.jpg": "/merkle-coding-challenge/static/media/News_Dummy_Image.53ea2b7d54d059f1638d.jpg",
-    "index.html": "/merkle-coding-challenge/index.html",
-    "static/media/icon-clock.svg": "/merkle-coding-challenge/static/media/icon-clock.324e8639da84f759f866d26df4911183.svg",
-    "main.910564d3.css.map": "/merkle-coding-challenge/static/css/main.910564d3.css.map",
-    "main.991505cd.js.map": "/merkle-coding-challenge/static/js/main.991505cd.js.map",
-    "787.a49d27d9.chunk.js.map": "/merkle-coding-challenge/static/js/787.a49d27d9.chunk.js.map"
+    "main.css": "/merkle-challenge/static/css/main.910564d3.css",
+    "main.js": "/merkle-challenge/static/js/main.1ddc018a.js",
+    "static/js/787.a49d27d9.chunk.js": "/merkle-challenge/static/js/787.a49d27d9.chunk.js",
+    "static/media/News_Dummy_Image.jpg": "/merkle-challenge/static/media/News_Dummy_Image.53ea2b7d54d059f1638d.jpg",
+    "index.html": "/merkle-challenge/index.html",
+    "static/media/icon-clock.svg": "/merkle-challenge/static/media/icon-clock.324e8639da84f759f866d26df4911183.svg",
+    "main.910564d3.css.map": "/merkle-challenge/static/css/main.910564d3.css.map",
+    "main.1ddc018a.js.map": "/merkle-challenge/static/js/main.1ddc018a.js.map",
+    "787.a49d27d9.chunk.js.map": "/merkle-challenge/static/js/787.a49d27d9.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.910564d3.css",
-    "static/js/main.991505cd.js"
+    "static/js/main.1ddc018a.js"
   ]
 }
