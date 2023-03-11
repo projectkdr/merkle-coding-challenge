@@ -2,7 +2,8 @@
 export type StoriesState = {
   topStoryStatus: Status,
   topStoryIds: number[],
-  storyDetails: StoryDetail[],
+  storyDetailsStatus: Status,
+  storyDetails: StoryDetail[]
 }
 
 export type StoryDetail = {

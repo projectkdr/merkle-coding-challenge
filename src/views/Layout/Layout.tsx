@@ -1,35 +1,34 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Outlet } from 'react-router-dom'
 import { Status } from '../../models/storiesModels'
-import { fetchStoryItemAsyncAction, fetchTopStoriesAsyncAction } from '../../store/asyncActions/storiesAsyncActions'
+import { fetchStoryDetailsAsyncAction, fetchTopStoriesAsyncAction } from '../../store/asyncActions/storiesAsyncActions'
 import { AppDispatch, RootState } from '../../store/storeConfig'
+import { ErrorMessage } from './../../constants/constant'
 
 const Layout = () => {
-    const dispatch = useDispatch<AppDispatch>()
-    const topStoryStatus = useSelector((state: RootState) => state.stories.topStoryStatus)
+  const dispatch = useDispatch<AppDispatch>()
+  const { storyDetailsStatus, topStoryStatus } = useSelector((state: RootState) => state.stories)
 
-    const [isAllStoriesDataLoader, setIsAllStoriesDataLoader] = useState(false)
+  useEffect(() => {
+    dispatch(fetchTopStoriesAsyncAction())
+  }, [dispatch])
 
-    useEffect(() => {
-        dispatch(fetchTopStoriesAsyncAction())
-        console.log('Layout test')
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+  useEffect(() => {
+    if (topStoryStatus === Status.SUCCESS) {
+      dispatch(fetchStoryDetailsAsyncAction())
+    }
+  }, [dispatch, topStoryStatus])
 
-    useEffect(() => {
-        if (topStoryStatus === Status.SUCCESS) {
-            dispatch(fetchStoryItemAsyncAction())
-            setIsAllStoriesDataLoader(true)
-        }
-    }, [dispatch, topStoryStatus])
-
-    return (
-        <div>
-            {/* <Header /> */}
-            {topStoryStatus === Status.SUCCESS && isAllStoriesDataLoader && <Outlet />}
-        </div>
-    )
+  return (
+    <div>
+      {topStoryStatus === Status.SUCCESS && storyDetailsStatus === Status.SUCCESS ? (
+        <Outlet />
+      ) : topStoryStatus === Status.FAILED || storyDetailsStatus === Status.FAILED ? (
+        <h1>{ErrorMessage.DEFAULT}</h1>
+      ) : null}
+    </div>
+  )
 }
 
 export default Layout

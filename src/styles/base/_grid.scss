@@ -20,22 +20,22 @@ $largeDesktopColumnWidth: calc(100% / $largeDesktopColumns);
 
 // Define the column classes for each screen size
 .col-width {
-    flex: 0 0 $mobileColumnWidth;
-    max-width: $mobileColumnWidth;
+  flex: 0 0 $mobileColumnWidth;
+  max-width: $mobileColumnWidth;
 
-    @include media-breakpoint-up('md') {
-        flex: 0 0 $tabletColumnWidth;
-        max-width: $tabletColumnWidth;
-        padding: 0 $gutterWidth;
-    }
+  @include media-breakpoint-up('md') {
+    flex: 0 0 $tabletColumnWidth;
+    max-width: $tabletColumnWidth;
+    padding: 0 $gutterWidth;
+  }
 
-    @include media-breakpoint-up('lg') {
-        flex: 0 0 $desktopColumnWidth;
-        max-width: $desktopColumnWidth;
-    }
+  @include media-breakpoint-up('lg') {
+    flex: 0 0 $desktopColumnWidth;
+    max-width: $desktopColumnWidth;
+  }
 
-    @include media-breakpoint-up('xl') {
-        flex: 0 0 $largeDesktopColumnWidth;
-        max-width: $largeDesktopColumnWidth;
-    }
+  @include media-breakpoint-up('xl') {
+    flex: 0 0 $largeDesktopColumnWidth;
+    max-width: $largeDesktopColumnWidth;
+  }
 }

@@ -4,20 +4,13 @@ import Layout from '../views/Layout/Layout'
 import News from '../views/Layout/News/News'
 
 const Routers = () => (
-    <BrowserRouter>
-        <Routes>
-            <Route element={<Layout />}>
-                <Route
-                    path="/"
-                    element={<News />}
-                />
-                {/* <Route
-                    path="/story/:storyId"
-                    element={<NewsStory />}
-                /> */}
-            </Route>
-        </Routes>
-    </BrowserRouter>
+  <BrowserRouter>
+    <Routes>
+      <Route element={<Layout />}>
+        <Route path="/" element={<News />} />
+      </Route>
+    </Routes>
+  </BrowserRouter>
 )
 
 export default Routers

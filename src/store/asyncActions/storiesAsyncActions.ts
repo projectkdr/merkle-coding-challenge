@@ -29,8 +29,8 @@ export const fetchTopStoriesAsyncAction = createAsyncThunk(
  * Fetches 10 random stories from the top story ids.
  * @returns an array of story details
 */
-export const fetchStoryItemAsyncAction = createAsyncThunk(
-  'stories/fetchStoryItemAsyncAction',
+export const fetchStoryDetailsAsyncAction = createAsyncThunk(
+  'stories/fetchStoryDetailsAsyncAction',
   async (_, thunkAPI) =>
     asyncThunkWrapper(thunkAPI, async () => {
 
@@ -46,9 +46,11 @@ export const fetchStoryItemAsyncAction = createAsyncThunk(
       }
 
       // Fetch the details of each story using the fetchStoryItem function
-      const storyDetails = await Promise.all(randomStoryIds.map(fetchStoryItem))
-      // Sort the story items in asceding order using story score
-      storyDetails.sort((a, b) => a.storyScore - b.storyScore)
+      const storyDetails = (await Promise.all(randomStoryIds.map(fetchStoryItem)))
+        // Remove any undefined items from the storyDetails array
+        .filter(detail => detail.author !== 'Error__fetchStoryItem')
+        // Sort the story items in asceding order using story score
+        .sort((a, b) => a.storyScore - b.storyScore)
 
       return { storyDetails }
     })
@@ -60,22 +62,44 @@ export const fetchStoryItemAsyncAction = createAsyncThunk(
  * @returns story detail
  */
 const fetchStoryItem = async (itemId: number) => {
-  // Fetch the story item JSON data from the API and parse it as a StoryItemData object.
-  const storyItemResponse = await fetch(`${API_URL}/item/${itemId}.json`)
-  const { by: userId, score, time, title, url } = await storyItemResponse.json() as StoryItemData
+  try {
+    // Fetch the story item JSON data from the API and parse it as a StoryItemData object.
+    const storyItemResponse = await fetch(`${API_URL}/item/${itemId}.json`)
+    const { by: userId, score, time, title, url } = await storyItemResponse.json() as StoryItemData
 
-  // Fetch the author JSON data from the API and parse it as a UserData object.
-  const userResponse = await fetch(`${API_URL}/user/${userId}.json`)
-  const { id, karma } = await userResponse.json() as UserData
+    // Checks storyItemResponse response status and throws error if not successful (status code is not 200).
+    if (storyItemResponse.status !== 200) {
+      throw (storyItemResponse)
+    }
+    // Fetch the author JSON data from the API and parse it as a UserData object.
+    const userResponse = await fetch(`${API_URL}/user/${userId}.json`)
 
-  const storyDetail: StoryDetail = {
-    author: id,
-    authorKarma: karma,
-    storyScore: score,
-    storyDate: formatDate(time),
-    storyTitle: title,
-    storyUrl: url
+    // Checks userResponse response status and throws error if not successful (status code is not 200).
+    if (userResponse.status !== 200) {
+      throw (userResponse)
+    }
+    const { id, karma } = await userResponse.json() as UserData
+
+
+    const storyDetail: StoryDetail = {
+      author: id,
+      authorKarma: karma,
+      storyScore: score,
+      storyDate: formatDate(time),
+      storyTitle: title,
+      storyUrl: url
+    }
+
+    return storyDetail
+  } catch (error) {
+    console.error(error)
+    return {
+      author: 'Error__fetchStoryItem',
+      authorKarma: 0,
+      storyScore: 0,
+      storyDate: '',
+      storyTitle: '',
+      storyUrl: ''
+    }
   }
-
-  return storyDetail
 }
