@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import axios from "axios"
-import { StoryDetail, StoryItemData, UserData } from "../../models/storiesModels"
+import { Status, StoryDetail, StoryItemData, UserData } from "../../models/storiesModels"
 import { formatDate } from "../../utils/helperUtils"
 import { asyncThunkWrapper } from "../../utils/reduxUtils"
 import { RootState } from "../storeConfig"
@@ -48,7 +48,7 @@ export const fetchStoryDetailsAsyncAction = createAsyncThunk(
       // Fetch the details of each story using the fetchStoryItem function
       const storyDetails = (await Promise.all(randomStoryIds.map(fetchStoryItem)))
         // Remove any undefined items from the storyDetails array
-        .filter(detail => detail.author !== 'Error__fetchStoryItem')
+        .filter(detail => detail.author !== Status.FAILED)
         // Sort the story items in asceding order using story score
         .sort((a, b) => a.storyScore - b.storyScore)
 
@@ -94,7 +94,7 @@ const fetchStoryItem = async (itemId: number) => {
   } catch (error) {
     console.error(error)
     return {
-      author: 'Error__fetchStoryItem',
+      author: Status.FAILED,
       authorKarma: 0,
       storyScore: 0,
       storyDate: '',
