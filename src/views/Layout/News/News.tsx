@@ -16,7 +16,7 @@ const News = () => {
       <div className="container">
         <div className={styles.row}>
           {storyDetails.map(storyDetail => (
-            <Story key={storyDetail.author} {...storyDetail} />
+            <Story key={storyDetail.storyId} {...storyDetail} />
           ))}
         </div>
       </div>

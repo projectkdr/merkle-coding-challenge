@@ -1,16 +1,16 @@
 import React from 'react'
-import { BrowserRouter, Route, Routes, HashRouter } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Layout from '../views/Layout/Layout'
 import News from '../views/Layout/News/News'
 
 const Routers = () => (
-  <HashRouter>
+  <BrowserRouter>
     <Routes>
       <Route element={<Layout />}>
         <Route path="/" element={<News />} />
       </Route>
     </Routes>
-  </HashRouter>
+  </BrowserRouter>
 )
 
 export default Routers
